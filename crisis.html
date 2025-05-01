@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CrisisPath DSL - Biblioteka Scenariuszy Kryzysowych</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-hcl.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    <style>
+        .scenario-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .scenario-card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans">
+    <div class="container mx-auto px-4 py-8">
+        <h1 class="text-4xl font-bold text-center mb-12 text-gray-800">CrisisPath DSL - Biblioteka Scenariuszy</h1>
+        
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="bg-white shadow-lg rounded-lg p-6 scenario-card">
+                <h2 class="text-2xl font-semibold mb-4 text-gray-700">Pandemia COVID-19</h2>
+                <pre><code class="language-hcl">scenario "COVID19Pandemic" {
+    crisis "GlobalHealthEmergency" {
+        trigger = "virus_mutation"
+        duration = "180d"
+        geographic_spread = "global"
+    }
+
+    actors {
+        organization "HealthSystem" {
+            hospital_capacity = 0.8
+            icu_beds = 500
+            vaccination_rate = 0.65
+        }
+
+        population "Citizens" {
+            total_population = 1000000
+            vulnerable_groups = [
+                "elderly", 
+                "immunocompromised"
+            ]
+        }
+    }
+
+    mitigation_strategies {
+        key_actions = [
+            "lockdown",
+            "mask_mandate",
+            "remote_work"
+        ]
+    }
+}</code></pre>
+            </div>
+
+            <div class="bg-white shadow-lg rounded-lg p-6 scenario-card">
+                <h2 class="text-2xl font-semibold mb-4 text-gray-700">Powódź Miejska</h2>
+                <pre><code class="language-hcl">scenario "UrbanFloodingCrisis" {
+    crisis "FloodEvent" {
+        trigger = "extreme_rainfall"
+        duration = "72h"
+        flood_level = "severe"
+        affected_area = "metropolitan"
+    }
+
+    actors {
+        organization "CityEmergencyServices" {
+            rescue_teams = 25
+            emergency_shelters = 10
+            evacuation_capacity = 50000
+        }
+
+        infrastructure "UrbanSystems" {
+            critical_points = [
+                "subway_tunnels",
+                "power_substations",
+                "hospital_districts"
+            ]
+        }
+    }
+
+    risk_assessment {
+        probability = 0.7
+        potential_economic_impact = "high"
+    }
+}</code></pre>
+            </div>
+
+            <div class="bg-white shadow-lg rounded-lg p-6 scenario-card">
+                <h2 class="text-2xl font-semibold mb-4 text-gray-700">Atak Ransomware</h2>
+                <pre><code class="language-hcl">scenario "RansomwareAttack" {
+    crisis "CyberSecurity" {
+        trigger = "supply_chain_vulnerability"
+        target_systems = [
+            "government_networks",
+            "financial_institutions"
+        ]
+        potential_data_loss = true
+    }
+
+    actors {
+        organization "CyberDefenseTeam" {
+            incident_response_capacity = "high"
+            system_isolation_speed = "rapid"
+        }
+
+        actor "AffectedOrganizations" {
+            total_impacted = 150
+            estimated_financial_loss = 5000000
+        }
+    }
+
+    mitigation_strategies {
+        immediate_actions = [
+            "system_isolation",
+            "backup_restoration",
+            "forensic_investigation"
+        ]
+    }
+}</code></pre>
+            </div>
+
+            <div class="bg-white shadow-lg rounded-lg p-6 scenario-card">
+                <h2 class="text-2xl font-semibold mb-4 text-gray-700">Zakłócenia Łańcucha Dostaw</h2>
+                <pre><code class="language-hcl">scenario "SupplyChainDisruption" {
+    crisis "LogisticsBreakdown" {
+        trigger = "geopolitical_conflict"
+        duration = "90d"
+        global_impact_radius = true
+    }
+
+    actors {
+        organization "GlobalLogistics" {
+            affected_trade_routes = 25
+            alternative_route_capacity = 0.4
+        }
+
+        economic_sector "Manufacturing" {
+            production_delay_risk = 0.75
+            critical_component_shortage = true
+        }
+    }
+
+    risk_mitigation {
+        diversification_strategies = [
+            "multiple_supplier_contracts",
+            "local_production_boost",
+            "inventory_expansion"
+        ]
+    }
+}</code></pre>
+            </div>
+
+            <div class="bg-white shadow-lg rounded-lg p-6 scenario-card">
+                <h2 class="text-2xl font-semibold mb-4 text-gray-700">Awaria Elektrowni</h2>
+                <pre><code class="language-hcl">scenario "PowerPlantFailure" {
+    crisis "EnergyInfrastructure" {
+        trigger = "equipment_malfunction"
+        duration = "48h"
+        region = "metropolitan_area"
+    }
+
+    actors {
+        infrastructure "PowerGrid" {
+            affected_substations = 5
+            backup_generator_capacity = 0.6
+            restoration_time_estimate = "36h"
+        }
+
+        population "ResidentialAreas" {
+            total_affected = 500000
+            critical_services_impact = [
+                "hospitals",
+                "emergency_services",
+                "water_treatment"
+            ]
+        }
+    }
+
+    emergency_response {
+        priority_actions = [
+            "grid_stabilization",
+            "critical_infrastructure_support",
+            "public_communication"
+        ]
+    }
+}</code></pre>
+            </div>
+
+            <div class="bg-white shadow-lg rounded-lg p-6 scenario-card">
+                <h2 class="text-2xl font-semibold mb-4 text-gray-700">Katastrofa Ekologiczna</h2>
+                <pre><code class="language-hcl">scenario "EnvironmentalDisaster" {
+    crisis "ChemicalSpill" {
+        trigger = "industrial_accident"
+        duration = "14d"
+        contamination_area = "50km_radius"
+    }
+
+    actors {
+        organization "EnvironmentalAgency" {
+            response_teams = 15
+            decontamination_capacity = "high"
+            emergency_evacuation_zone = "10km"
+        }
+
+        ecosystem "AffectedEnvironment" {
+            impact_areas = [
+                "water_sources",
+                "agricultural_land",
+                "wildlife_habitats"
+            ]
+            long_term_recovery_estimate = "3years"
+        }
+    }
+
+    mitigation_strategies {
+        containment_actions = [
+            "chemical_neutralization",
+            "area_quarantine",
+            "ecological_monitoring"
+        ]
+    }
+}</code></pre>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Manually trigger Prism highlighting
+        Prism.highlightAll();
+    </script>
+</body>
+</html>
